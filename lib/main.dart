@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import './src/home.dart';
-
 void main() {
+
+
 
 
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new MyHomePage(title: 'New List', key: key,),
     );
   }
 }

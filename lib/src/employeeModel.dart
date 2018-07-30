@@ -1,4 +1,6 @@
 
+
+import 'package:firebase_database/firebase_database.dart';
 class EmployeeModel {
   String id;
   String name;
@@ -6,15 +8,19 @@ class EmployeeModel {
 
   EmployeeModel({this.id, this.name, this.job});
 
-  EmployeeModel.toJson(Map newEmployee):
-
-      name = newEmployee['name'],
-  job = newEmployee['job'];
+ toJson(){
+   return{
+   'name': name,
+   'job': job,
+ };
+ }
 
   EmployeeModel.fromJson(Map parsedJson):
       id = parsedJson['id'],
       name = parsedJson['name'],
   job = parsedJson['job'];
+
+
 
 }
 
