@@ -1,6 +1,8 @@
-# firebase_api1
+# firebase Database Flutter Dart Firebase Auth
 
 A new Flutter project.
+
+Showcases auth, creating, fectching, modifying and deleting records from FB database
 
 ## Getting Started
 
