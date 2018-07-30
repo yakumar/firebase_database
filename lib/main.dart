@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './src/home.dart';
+import './src/login.dart';
 void main() {
 
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'New List', key: key,),
+      home: new LoginPage(),
     );
   }
 }

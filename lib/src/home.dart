@@ -2,15 +2,18 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'employeeModel.dart';
+import 'login.dart';
 
 final FirebaseDatabase firebaseDatabase = FirebaseDatabase.instance;
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  final String title;
+class MyHomePage extends StatefulWidget {
+  MyHomePage();
+
 
   @override
   _MyHomePageState createState() => new _MyHomePageState();
@@ -21,20 +24,26 @@ class _MyHomePageState extends State<MyHomePage> {
   final _jobController = new TextEditingController();
   String _name = '';
   String _job = '';
+  String _email = '';
 
 //firebaseDatabase.reference().child('employees').update(value)
   @override
   void initState() {
     super.initState();
+    firebaseAuth.currentUser().then((curUser){
+      print(curUser.email);
+
+      _email = curUser.email;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: new Text('Firebase list'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.next_week), onPressed: () {}),
+          IconButton(icon: Icon(Icons.all_out), onPressed: _logout),
         ],
       ),
       body: Container(
@@ -44,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: new ListView(
             children: <Widget>[
               new Text(
-                'You have pushed the button this many times:',
+                'Welcome $_email',
               ),
               TextField(
                 controller: _nameController,
@@ -208,4 +217,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+
+  Future _logout() async{
+    try{
+      await firebaseAuth.signOut();
+
+      Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context){
+        return new LoginPage();
+      }));
+    } catch (e){
+      print(e);
+    }
+  }
 }
